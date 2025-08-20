@@ -1,0 +1,22 @@
+# Usamos una imagen base de Node.js
+FROM node:20-alpine
+
+# Definimos el directorio de trabajo dentro del contenedor
+WORKDIR /app
+
+# C
+COPY package.json pnpm-lock.yaml turbo.json pnpm-workspace.yaml ./
+
+COPY packages/config/package.json ./packages/config/
+COPY packages/tsconfig/package.json ./packages/tsconfig/
+
+COPY apps/gateway/package.json ./apps/gateway/
+
+
+RUN pnpm install --no-frozen-lockfile
+
+
+COPY . .
+
+
+CMD ["pnpm", "run", "dev", "--filter", "gateway"]

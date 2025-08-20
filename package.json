@@ -1,0 +1,20 @@
+{
+  "name": "ecommerce-monorepo",
+  "packageManager": "pnpm@9.0.0",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Monorepo para un e-commerce profesional.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "test": "turbo run test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "turbo": "latest"
+  }
+}

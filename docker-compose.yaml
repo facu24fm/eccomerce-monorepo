@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  gateway:
+    build:
+      context: .
+      dockerfile: ./apps/gateway/Dockerfile.dev
+    container_name: gateway_dev
+    ports:
+      - '3001:3001'
+    volumes:
+      - .:/app
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+      - DATABASE_URL=postgresql://user:password@postgres:5432/ecommerce_db
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - backend-network
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres_dev
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=ecommerce_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - backend-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis_dev
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    networks:
+      - backend-network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  backend-network:
+    driver: bridge
