@@ -1,0 +1,16 @@
+{
+  "name": "@ecom/config",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint . --cache --fix",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "eslint": "latest",
+    "prettier": "latest",
+    "typescript": "latest"
+  }
+}
