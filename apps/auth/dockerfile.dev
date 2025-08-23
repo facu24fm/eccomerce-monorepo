@@ -4,7 +4,7 @@ WORKDIR /app
 
 RUN npm install -g pnpm
 
-
+# Solo copia los archivos que necesita el gateway
 COPY package.json pnpm-lock.yaml turbo.json ./
 COPY apps/gateway/package.json ./apps/gateway/
 COPY packages/config/package.json ./packages/config/
@@ -13,5 +13,5 @@ COPY packages/tsconfig/package.json ./packages/tsconfig/
 RUN pnpm install --no-frozen-lockfile
 COPY . .
 
-
+# Inicia solo el servidor del gateway
 CMD ["pnpm", "run", "dev"]

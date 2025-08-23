@@ -1,30 +1,65 @@
-version: '3.8'
 
 services:
   gateway:
     build:
       context: .
-      dockerfile: ./apps/gateway/Dockerfile.dev
+      dockerfile: ./apps/gateway/dockerfile.dev
     container_name: gateway_dev
     ports:
-      - '3001:3001'
-    volumes:
-      - .:/app
+      - '3003:3003' 
     environment:
       - NODE_ENV=development
-      - PORT=3001
+      - PORT=3003
       - DATABASE_URL=postgresql://user:password@postgres:5432/ecommerce_db
+    volumes:
+      - .:/app
+    depends_on:
+      - auth
+      - postgres
+    networks:
+      - myapp-network
+
+  auth:
+    build:
+      context: .
+      dockerfile: ./apps/auth/dockerfile.dev
+    container_name: auth_dev
+    ports:
+      - '3002:3002' # Puerto para el auth
+    environment:
+      - NODE_ENV=development
+      - PORT=3002
+      - DATABASE_URL=postgresql://user:password@postgres:5432/ecommerce_db
+    volumes:
+      - .:/app
     depends_on:
       - postgres
-      - redis
     networks:
-      - backend-network
+      - myapp-network
+
+  catalog:
+    build:
+      context: .
+      dockerfile: ./apps/catalog/dockerfile.dev
+    container_name: catalog_dev
+    ports:
+      - '3004:3004' # Puerto para el catálogo
+    environment:
+      - NODE_ENV=development
+      - PORT=3004
+      - DATABASE_URL=postgresql://user:password@postgres:5432/ecommerce_db
+    volumes:
+      - .:/app
+    depends_on:
+      - postgres
+    networks:
+      - myapp-network
 
   postgres:
     image: postgres:15-alpine
     container_name: postgres_dev
     ports:
-      - '5432:5432'
+      - '5432:5432' # Puerto de la base de datos
     environment:
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=password
@@ -32,22 +67,22 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - backend-network
+      - myapp-network
 
   redis:
     image: redis:7-alpine
     container_name: redis_dev
     ports:
-      - '6379:6379'
+      - '6379:6379' # Puerto de Redis
     volumes:
       - redis_data:/data
     networks:
-      - backend-network
+      - myapp-network
 
 volumes:
   postgres_data:
   redis_data:
 
 networks:
-  backend-network:
+  myapp-network:
     driver: bridge
