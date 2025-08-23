@@ -137,3 +137,62 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# ===== ECOMMERCE PROJECT SPECIFIC =====
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+dev.db*
+
+# Prisma generated files
+prisma/migrations/
+!prisma/schema.prisma
+!prisma/schema.dev.prisma
+
+# Docker volumes and data
+docker-data/
+postgres-data/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Status and documentation temp files
+STATUS.md
+
+# Testing and development
+test-results/
+coverage/
+.nyc_output/
+
+# Build outputs
+build/
+dist/
+out/
+
+# Package manager locks (keep only one)
+# npm
+package-lock.json
+# yarn
+yarn.lock
+# Keep pnpm-lock.yaml for this project
