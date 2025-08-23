@@ -12,7 +12,7 @@ Este proyecto es una tienda digital. Permite mostrar productos, agregarlos al ca
 ### Backend
 - Node.js y Express para la API
 - TypeScript también en el backend
-- MongoDB para guardar productos, usuarios y compras
+- Postgresql para la base de datos
 
 ## Funcionalidades
 - Ver productos
