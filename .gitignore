@@ -138,31 +138,31 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
-# ===== ECOMMERCE PROJECT SPECIFIC =====
+# ===== PROYECTO ECOMMERCE ESPECÍFICO =====
 
-# Database files
-*.db
-*.sqlite
-*.sqlite3
-dev.db*
+# Archivos de base de datos PostgreSQL
+postgres-data/
+pgdata/
+*.sql.backup
+*.dump
 
-# Prisma generated files
+# Archivos Prisma generados
 prisma/migrations/
 !prisma/schema.prisma
-!prisma/schema.dev.prisma
 
-# Docker volumes and data
+# Volúmenes y datos Docker
 docker-data/
 postgres-data/
+docker-compose.override.yml
 
-# IDE and editor files
+# Archivos IDE y editores
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
-# OS generated files
+# Archivos generados por SO
 .DS_Store
 .DS_Store?
 ._*
@@ -171,28 +171,28 @@ postgres-data/
 ehthumbs.db
 Thumbs.db
 
-# Temporary files
+# Archivos temporales
 *.tmp
 *.temp
 temp/
 tmp/
 
-# Status and documentation temp files
+# Archivos de estado y documentación temporal
 STATUS.md
 
-# Testing and development
+# Testing y desarrollo
 test-results/
 coverage/
 .nyc_output/
 
-# Build outputs
+# Salidas de compilación
 build/
 dist/
 out/
 
-# Package manager locks (keep only one)
+# Locks de package managers (mantener solo uno)
 # npm
 package-lock.json
 # yarn
 yarn.lock
-# Keep pnpm-lock.yaml for this project
+# Mantener pnpm-lock.yaml para este proyecto
